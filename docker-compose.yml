@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: retornocero-backend
+    restart: unless-stopped
+    ports:
+      - "8200:8200"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - DATABASE_URL=sqlite:////app/data/retornocero.db
+      - SECRET_KEY=retornocero-jwt-secret-2026-banda-covers-jose
+    networks:
+      - retornocero
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: retornocero-frontend
+    restart: unless-stopped
+    ports:
+      - "8201:8201"
+    depends_on:
+      - backend
+    networks:
+      - retornocero
+
+networks:
+  retornocero:
+    driver: bridge
+
+volumes:
+  data:

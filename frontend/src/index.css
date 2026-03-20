@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .chord {
+    @apply text-blue-700 dark:text-orange-400 font-bold font-mono text-sm;
+    display: inline-block;
+    position: relative;
+  }
+
+  .chord-line {
+    @apply block text-blue-700 dark:text-orange-400 font-bold font-mono leading-none;
+    min-height: 1.2em;
+    white-space: pre;
+  }
+
+  .lyric-line {
+    @apply block leading-tight;
+    white-space: pre;
+  }
+
+  .song-section-header {
+    @apply text-gray-500 dark:text-gray-400 italic text-sm font-sans mt-4 mb-1;
+  }
+}
+
+/* Auto-scroll animation */
+@keyframes autoScrollAnim {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
+}
+
+/* Song content font size */
+.song-content {
+  font-size: clamp(14px, 2vw, 18px);
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .song-content {
+    font-size: 16px;
+  }
+}
